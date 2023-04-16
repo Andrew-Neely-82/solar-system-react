@@ -1,0 +1,39 @@
+.zoom-control {
+  position: fixed;
+  top: 40vh;
+  right: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  // transform: translateY(-50%) translateX(-15px);
+  color: white;
+  font-size: 2.5em;
+  background: rgba(0 0 0 / 0.5);
+  border: 1px solid white;
+  padding: 1rem 2rem;
+  border-radius: 1em 0 0 1em;
+  z-index: 10;
+
+  span {
+    display: flex;
+  }
+
+  .btn-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+
+    .btn {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      backdrop-filter: blur(5px);
+      background: rgba(0 0 0 / 0.5);
+      border: 1px solid white;
+      border-radius: 0.5em;
+      margin-top: 0.5em;
+      cursor: pointer;
+    }
+  }
+}

@@ -1,0 +1,142 @@
+@import "./scss/defaults";
+@import "./scss/mixins";
+
+.zoom-container {
+  height: 100vh;
+  width: 100vw;
+  position: relative;
+
+  .solar-system {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center; // center the flex items horizontally
+
+    .sun-container {
+      position: relative;
+      margin-right: 1rem;
+
+      .name-tag {
+        @include nameTag;
+      }
+
+      .sun {
+        @include heightWidth(calculateSize(1.39e6));
+        @include backgroundImg("https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Sun_in_February_%28transparent%29.png/600px-Sun_in_February_%28transparent%29.png?20151128070150");
+        border: none;
+        z-index: -10;
+        position: relative;
+      }
+    }
+
+    .mercury-container {
+      position: relative;
+      margin-right: 1rem;
+
+      .name-tag {
+        @include nameTag;
+      }
+
+      @include planetStyle(4879, 57909227, "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b9/3D_Mercury.png/600px-3D_Mercury.png?20150725174636");
+    }
+
+    .venus-container {
+      position: relative;
+      margin-right: 1rem;
+
+      .name-tag {
+        @include nameTag;
+      }
+
+      @include planetStyle(12104, 108209475, "https://upload.wikimedia.org/wikipedia/commons/thumb/d/dc/Venus.png/640px-Venus.png");
+    }
+
+    .earth-container {
+      position: relative;
+      margin-right: 1rem;
+
+      .name-tag {
+        @include nameTag;
+      }
+
+      @include planetStyle(12756, 149598262, "https://toppng.com/uploads/preview/earth-planet-earth-psd-11563850686vockpcukvw.png");
+
+      .planet {
+        filter: drop-shadow(0 0 0.5rem white);
+      }
+    }
+
+    .mars-container {
+      position: relative;
+      margin-right: 1rem;
+
+      .name-tag {
+        @include nameTag;
+      }
+
+      @include planetStyle(6792, 227943824, "https://upload.wikimedia.org/wikipedia/commons/2/27/Mars_transparent.png");
+    }
+
+    .jupiter-container {
+      position: relative;
+      margin-right: 1rem;
+
+      .name-tag {
+        @include nameTag;
+        left: 5.5rem; /* adjust left value to move name tag */
+      }
+
+      @include planetStyle(142984, 778340821, "https://upload.wikimedia.org/wikipedia/commons/e/e1/Jupiter_%28transparent%29.png");
+
+      .planet {
+        transform: translateY(-50%) rotateZ(-2.5deg);
+      }
+    }
+
+    .saturn-container {
+      position: relative;
+      margin-right: 1rem;
+
+      .name-tag {
+        @include nameTag;
+      }
+
+      @include planetStyle(120536, 1426666422, "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c7/Saturn_during_Equinox.jpg/600px-Saturn_during_Equinox.jpg");
+
+      .planet {
+        border-radius: 0;
+        background-size: cover;
+      }
+    }
+
+    .uranus-container {
+      position: relative;
+      margin-right: 1rem;
+
+      .name-tag {
+        @include nameTag;
+      }
+
+      @include planetStyle(51118, 2870658186, "https://upload.wikimedia.org/wikipedia/commons/1/16/Uranus2-transparent.png");
+
+      .planet {
+        transform: translateY(-50%) rotateZ(1.75deg);
+      }
+    }
+
+    .neptune-container {
+      position: relative;
+      margin-right: 1rem;
+
+      .name-tag {
+        @include nameTag;
+      }
+
+      @include planetStyle(49528, 4498396441, "https://upload.wikimedia.org/wikipedia/commons/thumb/5/56/Neptune_Full.jpg/600px-Neptune_Full.jpg");
+
+      .planet {
+        transform: translateY(-50%) rotateZ(0.75deg);
+      }
+    }
+  }
+}

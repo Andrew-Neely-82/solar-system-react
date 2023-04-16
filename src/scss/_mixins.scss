@@ -1,0 +1,44 @@
+// Calculates the distance between the sun and a planet
+@function calculateDistance($distance) {
+  @return ($distance / 149.6); // 149.6 million km is 1 AU (astronomical unit)
+}
+
+// Calculates the size of a planet based on its diameter in km
+@function calculateSize($diameter) {
+  @return ($diameter / 12742) * 15; // Multiply by a scaling factor (15) so that the smallest planet is about 1rem
+}
+
+@mixin heightWidth($height) {
+  height: calc(#{$height} * 1rem); // Change the scaling factor to 1rem
+  width: calc(#{$height} * 1rem); // Change the scaling factor to 1rem
+}
+
+@mixin backgroundImg($image) {
+  background: url($image);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  border: none;
+  border-radius: 100%;
+}
+
+@mixin planetStyle($size, $distance, $img) {
+  $calculatedSize: calculateSize($size);
+  $calculatedDistance: calculateDistance($distance);
+  @include heightWidth($calculatedSize);
+  @include backgroundImg($img);
+  left: calc(#{$calculatedDistance * 50}px); // Update the scaling factor for the left position
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+@mixin nameTag() {
+  display: block;
+  position: absolute;
+  text-align: center;
+  width: 100%;
+  color: white;
+  font-size: calc(100vh);
+  z-index: 10; // Change z-index to 10, so the name tags are visible
+  top: -100rem;
+}
