@@ -1,16 +1,22 @@
+@import "./variables";
+
+@function strip-unit($number) {
+  @if type-of($number) == "number" and not unitless($number) {
+    @return $number / ($number * 0 + 1);
+  }
+  @return $number;
+}
+
 // Calculates the distance between the sun and a planet
 @function calculateDistance($distance) {
-  @return ($distance / 149.6); // 149.6 million km is 1 AU (astronomical unit)
+  $AU: 149.6; // 149.6 million km is 1 AU (astronomical unit)
+  @return ($distance / $AU);
 }
 
-// Calculates the size of a planet based on its diameter in km
-@function calculateSize($diameter) {
-  @return ($diameter / 12742) * 15; // Multiply by a scaling factor (15) so that the smallest planet is about 1rem
-}
-
-@mixin heightWidth($height) {
-  height: calc(#{$height} * 1rem); // Change the scaling factor to 1rem
-  width: calc(#{$height} * 1rem); // Change the scaling factor to 1rem
+@mixin heightWidth($diameter) {
+  $sizeInEm: diameterToEm($diameter);
+  height: #{$sizeInEm};
+  width: #{$sizeInEm};
 }
 
 @mixin backgroundImg($image) {
@@ -22,23 +28,42 @@
   border-radius: 100%;
 }
 
-@mixin planetStyle($size, $distance, $img) {
-  $calculatedSize: calculateSize($size);
-  $calculatedDistance: calculateDistance($distance);
-  @include heightWidth($calculatedSize);
+@mixin planetStyle($diameter, $distance, $img) {
+  $sizeInEm: diameterToEm($diameter);
+  @include heightWidth($sizeInEm); // Convert size to rem units
   @include backgroundImg($img);
-  left: calc(#{$calculatedDistance * 50}px); // Update the scaling factor for the left position
-  top: 50%;
+  margin-block-end: calc(#{$distance / 149.6} * 1rem);
   transform: translateY(-50%);
+
+  // Use the $solarSystemSizes map to set the size of the planet
+  $celestialBody: map-get($solarSystemSizes, $img);
+  $planetSize: diameterToEm($celestialBody);
+  width: $planetSize * 15; // Multiply by 15
+  height: $planetSize * 15; // Multiply by 15
 }
 
 @mixin nameTag() {
-  display: block;
-  position: absolute;
-  text-align: center;
+  display: flex;
+  justify-content: center;
   width: 100%;
   color: white;
-  font-size: calc(100vh);
+  // font-size: calc(10rem * 10);
+  font-size: 10em;
   z-index: 10; // Change z-index to 10, so the name tags are visible
   top: -100rem;
+}
+
+@function diameterToEm($celestialBody) {
+  // Standard size
+  $oneEm: map-get($solarSystemSizes, "earth");
+
+  // Calculate size relative to earth in em
+  @return (strip-unit($celestialBody) / strip-unit($oneEm)) * 1em;
+}
+
+@mixin container() {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
