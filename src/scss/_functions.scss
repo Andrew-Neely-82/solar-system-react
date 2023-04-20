@@ -1,0 +1,28 @@
+@import "./variables";
+
+// Function to calculate distances from the sun
+@function calculateDistance($distance) {
+  $AU: 149.6; // 1 AU (astronomical unit) = 149.6 million km
+  @return ($distance / $AU); // Return distance in AU
+}
+
+// Function to convert a planet's diameter to em based on the scale of Earth being 1em
+@function diameterToEm($celestialBody) {
+  $oneEm: map-get($solarSystemSizes, "earth"); // Get the standard size of Earth in the map
+  // Calculate the size relative to Earth in em
+  @return calc(strip-unit($celestialBody) / strip-unit($oneEm)) * 1em;
+}
+
+// Function to assist with setting media queries
+@function mMap($size) {
+  @return map-get($sizes, $size);
+}
+
+// Function to remove units from a number
+@function strip-unit($number) {
+  // If the number has a unit, return it without the unit
+  @if type-of($number) == "number" and not unitless($number) {
+    @return $number / ($number * 0 + 1);
+  }
+  @return $number; // Otherwise, return the original number
+}

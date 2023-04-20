@@ -3,14 +3,14 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 100%;
+  width: 100vw;
   background: linear-gradient(rgba(0 0 0 / 0.65), rgba(0 0 0 / 0.75));
   backdrop-filter: blur(10px);
   box-shadow: 0 0 1em rgba(0 0 0 / 0.5);
   padding: 1em 5em;
   z-index: 100;
 
-  .navbar-brand {
+  &-brand {
     justify-content: flex-start;
     width: 100%;
     font-size: 1.5em;
@@ -18,7 +18,7 @@
     color: white;
   }
 
-  .navbar-links {
+  &-links {
     justify-content: flex-end;
     width: 100%;
 
@@ -38,3 +38,30 @@
     }
   }
 }
+
+.dropdown-menu {
+  background: rgba(0 0 0 / 0.75);
+  border: 1px solid white;
+  border-radius: 1em;
+  transition: 350ms ease-in-out;
+  box-shadow: 0 0 1em black;
+
+  a {
+    color: rgba(255 255 255 / 0.7);
+
+    &:hover {
+      color: white;
+      background: linear-gradient(#000, rgba(50 50 50 / 0.5), #000);
+      transition: 350ms ease-in-out;
+    }
+  }
+
+  .dropdown-divider {
+    width: 80%;
+    text-align: center;
+    border: 1px solid white;
+    opacity: 1;
+  }
+}
+
+@import "./media";

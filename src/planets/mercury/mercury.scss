@@ -1,0 +1,14 @@
+@import "../../scss/variables";
+@import "../../scss/mixins";
+
+.mercury {
+  @include heightWidth(map-get($solarSystemSizes, mercury));
+  @include backgroundImg("https://upload.wikimedia.org/wikipedia/commons/thumb/b/b9/3D_Mercury.png/600px-3D_Mercury.png?20150725174636");
+  z-index: 1000;
+  position: relative;
+
+  &::before {
+    content: "Mercury";
+    @include nameTag();
+  }
+}

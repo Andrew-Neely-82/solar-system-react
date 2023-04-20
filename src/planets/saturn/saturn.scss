@@ -1,0 +1,22 @@
+@import "../../scss/variables";
+@import "../../scss/mixins";
+
+.saturn {
+  @include heightWidth(calc(map-get($solarSystemSizes, saturn) * 2));
+  // TODO: Get better image of Saturn
+  @include backgroundImg("https://upload.wikimedia.org/wikipedia/commons/thumb/c/c7/Saturn_during_Equinox.jpg/600px-Saturn_during_Equinox.jpg");
+  background-size: contain !important;
+  border-radius: 0 !important;
+  transform: rotateY(180deg);
+
+  &::before {
+    content: "Saturn";
+    @include nameTag();
+    transform: rotateY(-180deg) translateX(1.5rem);
+
+    &:hover {
+      background-color: white;
+      color: black;
+    }
+  }
+}

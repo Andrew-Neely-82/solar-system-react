@@ -1,66 +1,76 @@
-import { useState, useRef } from "react";
+import { Mercury, Venus, Earth, Mars, Jupiter, Saturn, Uranus, Neptune } from "./planets/export.js";
 import { Navbar, ZoomControl } from "./components/index.js";
+import { BrowserRouter } from "react-router-dom";
+import { useState, useRef } from "react";
 import "./App.scss";
 
 function App() {
   const [scaleFactor, setScaleFactor] = useState(1);
+  // scaleFactor stores the current scale factor of the solar system (default is 1).
+  // setScaleFactor updates the scaleFactor value in response to user input.
+  const [isDragging, setIsDragging] = useState(false);
+  // This code initializes a state variable called isDragging with a value of false.
+  // It is used to keep track of whether the user is currently dragging an element on the screen.
+  const [startCoords, setStartCoords] = useState({ x: 0, y: 0 });
+  const [offset, setOffset] = useState({ x: 0, y: 0 });
   const solarSystemRef = useRef(null); // Create a ref for the solar-system div
 
-  return (
-    <>
-      <Navbar />
-      <ZoomControl scaleFactor={scaleFactor} setScaleFactor={setScaleFactor} />
-      <div className="solar-system" style={{ transform: `scale(${scaleFactor})`, transformOrigin: "top left" }}>
-        {/* the sun */}
+  const handleMouseDown = (event) => {
+    setIsDragging(true);
+    setStartCoords({ x: event.clientX, y: event.clientY });
+  };
 
+  const handleMouseMove = (event) => {
+    if (isDragging) {
+      const dx = event.clientX - startCoords.x;
+      const dy = event.clientY - startCoords.y;
+      const scaleFactorX = solarSystemRef.current.offsetWidth / solarSystemRef.current.scrollWidth;
+      const scaleFactorY = solarSystemRef.current.offsetHeight / solarSystemRef.current.scrollHeight;
+      setOffset((prevOffset) => ({
+        x: prevOffset.x + (dx * scaleFactorX) / scaleFactor,
+        y: prevOffset.y + (dy * scaleFactorY) / scaleFactor,
+      }));
+      setStartCoords({ x: event.clientX, y: event.clientY });
+    }
+  };
+
+  const handleMouseUp = () => {
+    setIsDragging(false); // set default mouse dragging to false
+  };
+
+  return (
+    <BrowserRouter>
+      <Navbar />
+      <ZoomControl scaleFactor={scaleFactor} setScaleFactor={setScaleFactor} solarSystemRef={solarSystemRef} offset={offset} setOffset={setOffset} />
+      <div
+        className="solar-system"
+        style={{
+          transform: `scale(${scaleFactor}) translate(${offset.x}px, ${offset.y}px)`,
+          transformOrigin: "center center",
+          cursor: isDragging ? "grabbing" : "grab",
+        }}
+        ref={solarSystemRef}
+        onMouseDown={handleMouseDown}
+        onMouseMove={handleMouseMove}
+        onMouseUp={handleMouseUp}>
+        {/* the sun */}
         <div id="sun" className="sun-container">
           <span className="name-tag">The Sun</span>
           <div className="sun"></div>
         </div>
 
         {/* the planets */}
-        <div id="mercury" className="mercury-container">
-          <span className="name-tag">Mercury</span>
-          <div className="mercury"></div>
-        </div>
-
-        <div id="venus" className="venus-container">
-          <span className="name-tag">Venus</span>
-          <div className="planet venus"></div>
-        </div>
-
-        <div id="earth" className="earth-container">
-          <span className="name-tag">Earth</span>
-          <div className="planet earth"></div>
-        </div>
-
-        <div id="mars" className="mars-container">
-          <span className="name-tag">Mars</span>
-          <div className="planet mars"></div>
-        </div>
-
-        <div id="jupiter" className="jupiter-container">
-          <span className="name-tag">Jupiter</span>
-          <div className="planet jupiter"></div>
-        </div>
-
-        <div id="saturn" className="saturn-container">
-          <span className="name-tag">Saturn</span>
-          <div className="planet saturn"></div>
-        </div>
-
-        <div id="uranus" className="uranus-container">
-          <span className="name-tag">Uranus</span>
-          <div className="planet uranus"></div>
-        </div>
-
-        <div id="neptune" className="neptune-container">
-          <span className="name-tag">Neptune</span>
-          <div className="planet neptune"></div>
-        </div>
+        <Mercury />
+        <Venus />
+        <Earth />
+        <Mars />
+        <Jupiter />
+        <Saturn />
+        <Uranus />
+        <Neptune />
         {/* end of planets */}
       </div>
-    </>
+    </BrowserRouter>
   );
 }
 

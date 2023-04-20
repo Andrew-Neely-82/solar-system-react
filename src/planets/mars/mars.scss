@@ -1,0 +1,21 @@
+@import "../../scss/variables";
+@import "../../scss/mixins";
+
+.mars-container {
+  @include container();
+  position: relative;
+
+  .name-tag {
+    // @include nameTag;
+  }
+
+  .mars {
+    @include heightWidth(map-get($solarSystemSizes, mars));
+    @include backgroundImg("https://upload.wikimedia.org/wikipedia/commons/2/27/Mars_transparent.png");
+
+    &::before {
+      content: "Mars";
+      @include nameTag();
+    }
+  }
+}

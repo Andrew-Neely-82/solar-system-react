@@ -1,0 +1,17 @@
+@import "../../scss/variables";
+@import "../../scss/mixins";
+
+.earth-container {
+  @include container();
+  position: relative;
+
+  .earth {
+    @include heightWidth(map-get($solarSystemSizes, earth));
+    @include backgroundImg("https://toppng.com/uploads/preview/earth-planet-earth-psd-11563850686vockpcukvw.png");
+
+    &::before {
+      content: "Earth";
+      @include nameTag();
+    }
+  }
+}

@@ -1,29 +1,28 @@
-import { Add as AddIcon, Remove as RemoveIcon } from "@mui/icons-material";
+import { Slider } from "@mui/material";
+import { marks } from "./marks.js";
 import "./style.scss";
 
 const ZoomControl = ({ scaleFactor, setScaleFactor }) => {
-  const handleZoomIn = () => {
-    const newScaleFactor = scaleFactor + 0.05;
-    setScaleFactor(Math.min(Math.max(newScaleFactor, 0.01), 100));
-  };
-
-  const handleZoomOut = () => {
-    const newScaleFactor = scaleFactor - 0.05;
-    setScaleFactor(Math.min(Math.max(newScaleFactor, 0.01), 100));
+  const handleZoomChange = (event, value) => {
+    setScaleFactor(Math.min(Math.max(value / 100, 0.01), 100));
   };
 
   return (
     <div className="zoom-control">
-      {/* button label */}
       <span>Zoom</span>
-      {/* button container */}
-      <div className="btn-container">
-        <div className="btn" onClick={handleZoomIn}>
-          <AddIcon />
-        </div>
-        <div className="btn" onClick={handleZoomOut}>
-          <RemoveIcon />
-        </div>
+      <div className="slider-container">
+        <Slider
+          value={scaleFactor * 100}
+          onChange={handleZoomChange}
+          min={10}
+          max={1000}
+          step={1}
+          orientation="horizontal"
+          aria-labelledby="slider-zoom-control"
+          marks={marks}
+          defaultValue={1}
+          sx={{ width: "300px" }}
+        />
       </div>
     </div>
   );

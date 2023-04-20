@@ -1,0 +1,19 @@
+@import "../../scss/variables";
+@import "../../scss/mixins";
+
+.neptune-container {
+  @include container();
+  position: relative;
+
+  .neptune {
+    @include heightWidth(map-get($solarSystemSizes, neptune));
+    @include backgroundImg("https://upload.wikimedia.org/wikipedia/commons/thumb/5/56/Neptune_Full.jpg/600px-Neptune_Full.jpg");
+    transform: rotateZ(-15deg);
+
+    &::before {
+      content: "Neptune";
+      @include nameTag;
+      transform: rotateZ(15deg) translateX(-33%) translateY(33%); // apply opposite rotation
+    }
+  }
+}

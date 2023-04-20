@@ -1,19 +1,18 @@
-@import "./scss/variables";
 @import "./scss/defaults";
-@import "./scss/mixins";
+@import "./scss/all";
 
 .solar-system {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
+  position: relative;
+  @include solarsystem();
+  height: max-content;
+  width: max-content;
+  padding-top: calc(50vh + 64px);
 
   .sun-container {
     @include container();
 
     .name-tag {
-      // @include nameTag;
+      @include nameTag;
       width: 100%;
     }
 
@@ -24,115 +23,11 @@
     }
   }
 
-  .mercury-container {
-    @include container();
-
-    .name-tag {
-      // @include nameTag;
-      // width: 100%;
-    }
-
-    .mercury {
-      @include heightWidth(map-get($solarSystemSizes, mercury));
-      @include backgroundImg("https://upload.wikimedia.org/wikipedia/commons/thumb/b/b9/3D_Mercury.png/600px-3D_Mercury.png?20150725174636");
-    }
-  }
-
-  .venus-container {
-    @include container();
-
-    .name-tag {
-      // @include nameTag;
-    }
-    .venus {
-      @include heightWidth(map-get($solarSystemSizes, venus));
-      @include backgroundImg("https://upload.wikimedia.org/wikipedia/commons/thumb/d/dc/Venus.png/640px-Venus.png");
-    }
-  }
-
-  .earth-container {
-    @include container();
-
-    .name-tag {
-      // @include nameTag;
-    }
-
-    .earth {
-      @include heightWidth(map-get($solarSystemSizes, earth));
-      @include backgroundImg("https://toppng.com/uploads/preview/earth-planet-earth-psd-11563850686vockpcukvw.png");
-    }
-  }
-
-  .mars-container {
-    @include container();
-
-    .name-tag {
-      // @include nameTag;
-    }
-
-    .mars {
-      @include heightWidth(map-get($solarSystemSizes, mars));
-      @include backgroundImg("https://upload.wikimedia.org/wikipedia/commons/2/27/Mars_transparent.png");
-    }
-  }
-
-  .jupiter-container {
-    @include container();
-
-    .name-tag {
-      // @include nameTag;
-    }
-
-    .jupiter {
-      @include heightWidth(map-get($solarSystemSizes, jupiter));
-      @include backgroundImg("https://upload.wikimedia.org/wikipedia/commons/e/e1/Jupiter_%28transparent%29.png");
-    }
-
-    // .planet {
-    //   transform: translateY(-50%) rotateZ(-2.5deg);
-    // }
-  }
-
-  .saturn-container {
-    @include container();
-
-    .name-tag {
-      // @include nameTag;
-    }
-
-    .saturn {
-      @include heightWidth(calc(map-get($solarSystemSizes, saturn) * 2));
-      // TODO: Get better image of Saturn
-      @include backgroundImg("https://upload.wikimedia.org/wikipedia/commons/thumb/c/c7/Saturn_during_Equinox.jpg/600px-Saturn_during_Equinox.jpg");
-      background-size: contain !important;
-      border-radius: 0 !important;
-      z-index: 1000;
-    }
-  }
-
-  .uranus-container {
-    @include container();
-
-    .name-tag {
-      // @include nameTag;
-    }
-
-    .uranus {
-      @include heightWidth(map-get($solarSystemSizes, uranus));
-      @include backgroundImg("https://upload.wikimedia.org/wikipedia/commons/1/16/Uranus2-transparent.png");
-    }
-  }
-
-  .neptune-container {
-    @include container();
-
-    .name-tag {
-      // @include nameTag;
-    }
-
-    .neptune {
-      @include heightWidth(map-get($solarSystemSizes, neptune));
-      @include backgroundImg("https://upload.wikimedia.org/wikipedia/commons/thumb/5/56/Neptune_Full.jpg/600px-Neptune_Full.jpg");
-    }
+  .planet {
+    position: absolute;
+    top: 120vh;
+    left: 50%;
   }
 }
+
+@import "./scss/media";

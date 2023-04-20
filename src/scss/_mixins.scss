@@ -1,23 +1,7 @@
 @import "./variables";
-
-@function strip-unit($number) {
-  @if type-of($number) == "number" and not unitless($number) {
-    @return $number / ($number * 0 + 1);
-  }
-  @return $number;
-}
+@import "./functions";
 
 // Calculates the distance between the sun and a planet
-@function calculateDistance($distance) {
-  $AU: 149.6; // 149.6 million km is 1 AU (astronomical unit)
-  @return ($distance / $AU);
-}
-
-@mixin heightWidth($diameter) {
-  $sizeInEm: diameterToEm($diameter);
-  height: #{$sizeInEm};
-  width: #{$sizeInEm};
-}
 
 @mixin backgroundImg($image) {
   background: url($image);
@@ -28,42 +12,49 @@
   border-radius: 100%;
 }
 
-@mixin planetStyle($diameter, $distance, $img) {
-  $sizeInEm: diameterToEm($diameter);
-  @include heightWidth($sizeInEm); // Convert size to rem units
-  @include backgroundImg($img);
-  margin-block-end: calc(#{$distance / 149.6} * 1rem);
-  transform: translateY(-50%);
-
-  // Use the $solarSystemSizes map to set the size of the planet
-  $celestialBody: map-get($solarSystemSizes, $img);
-  $planetSize: diameterToEm($celestialBody);
-  width: $planetSize * 15; // Multiply by 15
-  height: $planetSize * 15; // Multiply by 15
-}
-
-@mixin nameTag() {
-  display: flex;
-  justify-content: center;
-  width: 100%;
-  color: white;
-  // font-size: calc(10rem * 10);
-  font-size: 10em;
-  z-index: 10; // Change z-index to 10, so the name tags are visible
-  top: -100rem;
-}
-
-@function diameterToEm($celestialBody) {
-  // Standard size
-  $oneEm: map-get($solarSystemSizes, "earth");
-
-  // Calculate size relative to earth in em
-  @return (strip-unit($celestialBody) / strip-unit($oneEm)) * 1em;
-}
-
 @mixin container() {
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+// sets the height/width for the planet
+@mixin heightWidth($diameter) {
+  $sizeInEm: diameterToEm($diameter);
+  height: #{$sizeInEm};
+  width: #{$sizeInEm};
+}
+
+@mixin nameTag() {
+  position: absolute; /* Set the position of the pseudo-element to absolute */
+  top: -1.5rem; /* Adjust the position relative to its parent container */
+  left: 50%;
+  transform: translateX(-50%);
+  color: #fff;
+  font-size: 0.8rem;
+  padding: 0.2rem 0.5rem;
+  border-radius: 0.2rem;
+  z-index: 5;
+}
+
+// @mixin planetStyle($diameter, $distance, $img) {
+//   $sizeInEm: diameterToEm($diameter); // converts diameter to proper em
+//   @include heightWidth($sizeInEm); // Convert size to rem units
+//   @include backgroundImg($img); // set the img for the obj
+//   margin-block-end: calc(#{$distance / 149.6} * 1rem);
+//   transform: translateY(-50%);
+
+//   // Use the $solarSystemSizes map to set the size of the planet
+//   $celestialBody: map-get($solarSystemSizes, $img);
+//   $planetSize: diameterToEm($celestialBody);
+//   width: $planetSize * 15; // Multiply by 15
+//   height: $planetSize * 15; // Multiply by 15
+// }
+
+@mixin solarsystem() {
+  display: flex;
+  flex-direction: row;
   justify-content: center;
   align-items: center;
 }

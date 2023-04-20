@@ -1,0 +1,19 @@
+@import "../../scss/variables";
+@import "../../scss/mixins";
+
+.solar-system {
+  .venus-container {
+    @include container();
+    position: relative; /* Set the position of the parent container to relative */
+
+    .venus {
+      @include heightWidth(map-get($solarSystemSizes, venus));
+      @include backgroundImg("https://upload.wikimedia.org/wikipedia/commons/thumb/d/dc/Venus.png/640px-Venus.png");
+
+      &::before {
+        content: "Venus";
+        @include nameTag();
+      }
+    }
+  }
+}

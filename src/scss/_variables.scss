@@ -15,3 +15,27 @@ $solarSystemSizes: (
   uranus: 31518,
   neptune: 30599,
 );
+
+// celestial bodies (in mi)
+
+$solarSystemDistances: (
+  sun: 0,
+  mercury: 34951000,
+  venus: 66783000,
+  earth: 93317000,
+  mars: 154930000,
+  jupiter: 460410000,
+  saturn: 910610000,
+  uranus: 1826300000,
+  neptune: 2779600000,
+);
+
+// * media map
+
+$sizes: (
+  large: "1200px",
+  medium-large: "992px",
+  medium: "768px",
+  medium-small: "480px",
+  small: "320px",
+);
