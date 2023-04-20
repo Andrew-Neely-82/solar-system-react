@@ -1,19 +1,13 @@
 @import "../../scss/variables";
 @import "../../scss/mixins";
 
-.solar-system {
-  .uranus-container {
-    @include container();
-    position: relative;
+.uranus {
+  @include heightWidth(map-get($solarSystemSizes, uranus));
+  @include backgroundImg("https://upload.wikimedia.org/wikipedia/commons/1/16/Uranus2-transparent.png");
+  position: relative;
 
-    .uranus {
-      @include heightWidth(map-get($solarSystemSizes, uranus));
-      @include backgroundImg("https://upload.wikimedia.org/wikipedia/commons/1/16/Uranus2-transparent.png");
-
-      &::before {
-        content: "Uranus";
-        @include nameTag();
-      }
-    }
+  &::before {
+    content: "Uranus";
+    @include nameTag();
   }
 }

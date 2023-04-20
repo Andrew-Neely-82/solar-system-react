@@ -13,8 +13,9 @@
     content: "Saturn";
     @include nameTag();
     transform: rotateY(-180deg) translateX(1.5rem);
-
-    &:hover {
+  }
+  &:hover {
+    &::hover {
       background-color: white;
       color: black;
     }

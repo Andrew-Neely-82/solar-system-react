@@ -52,6 +52,16 @@
 //   height: $planetSize * 15; // Multiply by 15
 // }
 
+@mixin scaledDistance($distance, $scaleFactor: 1) {
+  $distanceInEm: distanceToEm($distance) * $scaleFactor;
+  margin-block-end: $distanceInEm;
+}
+
+// Add a function to convert distance to em units
+@function distanceToEm($distance) {
+  @return $distance / 149.6;
+}
+
 @mixin solarsystem() {
   display: flex;
   flex-direction: row;

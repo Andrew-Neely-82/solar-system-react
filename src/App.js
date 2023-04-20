@@ -68,7 +68,6 @@ function App() {
         <Saturn />
         <Uranus />
         <Neptune />
-        {/* end of planets */}
       </div>
     </BrowserRouter>
   );

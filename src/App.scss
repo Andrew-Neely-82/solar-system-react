@@ -19,7 +19,6 @@
     .sun {
       @include heightWidth(map-get($solarSystemSizes, sun));
       @include backgroundImg("https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Sun_in_February_%28transparent%29.png/600px-Sun_in_February_%28transparent%29.png?20151128070150");
-      z-index: -10;
     }
   }
 

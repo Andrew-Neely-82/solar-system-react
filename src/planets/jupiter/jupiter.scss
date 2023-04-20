@@ -1,18 +1,13 @@
 @import "../../scss/variables";
 @import "../../scss/mixins";
 
-.jupiter-container {
-  @include container();
+.jupiter {
+  @include heightWidth(map-get($solarSystemSizes, jupiter));
+  @include backgroundImg("https://upload.wikimedia.org/wikipedia/commons/e/e1/Jupiter_%28transparent%29.png");
   position: relative;
 
-  .jupiter {
-    @include heightWidth(map-get($solarSystemSizes, jupiter));
-    @include backgroundImg("https://upload.wikimedia.org/wikipedia/commons/e/e1/Jupiter_%28transparent%29.png");
-    // transform: rotateY(180deg) rotateZ(-2deg);
-
-    &::before {
-      content: "Jupiter";
-      @include nameTag();
-    }
+  &::before {
+    content: "Jupiter";
+    @include nameTag();
   }
 }
